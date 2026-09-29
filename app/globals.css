@@ -1,0 +1,58 @@
+@import "tailwindcss";
+
+@theme {
+  --font-space-grotesk: var(--font-space-grotesk), sans-serif;
+  --font-jetbrains-mono: var(--font-jetbrains-mono), monospace;
+
+  --color-frame: #111111;
+  --color-canvas: #F8F4EC;
+  --color-panel: #FFFFFF;
+  --color-subtle: #E6E6E2;
+  --color-accent: #EDB13E;
+
+  --color-mustard: #EDB13E;
+  --color-google-blue: #4C80F0;
+  --color-google-red: #D9503F;
+  --color-google-green: #4FA35A;
+}
+
+/* Page body drafting grid tile */
+body {
+  background-color: var(--color-canvas);
+  color: var(--color-frame);
+  font-family: var(--font-jetbrains-mono);
+  background-image: 
+    linear-gradient(to right, rgba(17, 17, 17, 0.045) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(17, 17, 17, 0.045) 1px, transparent 1px);
+  background-size: 24px 24px;
+}
+
+/* Thin black-on-light scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: #F8F4EC;
+}
+::-webkit-scrollbar-thumb {
+  background: #111111;
+  border-radius: 0px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #444444;
+}
+
+/* Neobrutalist hard shadows */
+.hard-shadow {
+  box-shadow: 4px 4px 0px #111111;
+}
+
+.hard-shadow-sm {
+  box-shadow: 2px 2px 0px #111111;
+}
+
+.hard-shadow-pressed {
+  box-shadow: 1px 1px 0px #111111;
+  transform: translate(2px, 2px);
+}

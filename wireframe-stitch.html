@@ -1,0 +1,601 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Code Roaster (Desi Edition) · DevFest Nashik 2026</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600;700&family=Rozha+One&display=swap" rel="stylesheet">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            cream: '#F8F4EC',
+            dark: '#141414',
+            mustard: '#EDB13E',
+            'mustard-light': '#F6CA6B',
+            'google-blue': '#4C80F0',
+            'google-red': '#D9503F',
+            'google-green': '#4FA35A',
+            'code-bg': '#171717',
+          },
+          fontFamily: {
+            sans: ['"Plus Jakarta Sans"', 'system-ui', 'sans-serif'],
+            mono: ['"JetBrains Mono"', 'monospace'],
+            desi: ['"Rozha One"', 'serif']
+          },
+          boxShadow: {
+            'brutal': '4px 4px 0px 0px #141414',
+            'brutal-lg': '6px 6px 0px 0px #141414',
+            'brutal-sm': '2.5px 2.5px 0px 0px #141414',
+            'brutal-active': '1px 1px 0px 0px #141414'
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    .hard-shadow {
+      box-shadow: 4px 4px 0px #141414;
+    }
+    .hard-shadow-lg {
+      box-shadow: 6px 6px 0px #141414;
+    }
+    .hard-shadow-sm {
+      box-shadow: 2px 2px 0px #141414;
+    }
+    .stamp-rotate {
+      transform: rotate(-3deg);
+    }
+    .warli-pattern {
+      background-image: radial-gradient(#141414 1.5px, transparent 1.5px);
+      background-size: 16px 16px;
+    }
+    /* Custom scrollbar for editor */
+    pre::-webkit-scrollbar, div::-webkit-scrollbar {
+      width: 6px;
+      height: 6px;
+    }
+    pre::-webkit-scrollbar-thumb, div::-webkit-scrollbar-thumb {
+      background: #333333;
+      border-radius: 3px;
+    }
+  </style>
+</head>
+<body class="bg-cream text-dark font-sans min-h-screen selection:bg-mustard selection:text-dark relative overflow-x-hidden antialiased">
+
+  <!-- Rangoli/Warli subtle background accents -->
+  <div class="fixed inset-0 pointer-events-none opacity-[0.035] warli-pattern z-0"></div>
+
+  <!-- Decorative Corner Motifs (Warli geometric inspired) -->
+  <div class="fixed top-4 left-4 pointer-events-none hidden lg:block opacity-40 z-0">
+    <svg width="60" height="60" viewBox="0 0 60 60" fill="none">
+      <polygon points="10,0 20,20 0,20" fill="#141414" />
+      <polygon points="10,40 20,20 0,20" fill="#141414" />
+      <circle cx="10" cy="20" r="3" fill="#EDB13E" />
+      <polygon points="30,0 40,20 20,20" fill="#141414" />
+      <polygon points="30,40 40,20 20,20" fill="#141414" />
+      <circle cx="30" cy="20" r="3" fill="#4C80F0" />
+    </svg>
+  </div>
+  <div class="fixed top-4 right-4 pointer-events-none hidden lg:block opacity-40 z-0">
+    <svg width="60" height="60" viewBox="0 0 60 60" fill="none">
+      <polygon points="30,0 40,20 20,20" fill="#141414" />
+      <polygon points="30,40 40,20 20,20" fill="#141414" />
+      <circle cx="30" cy="20" r="3" fill="#D9503F" />
+      <polygon points="50,0 60,20 40,20" fill="#141414" />
+      <polygon points="50,40 60,20 40,20" fill="#141414" />
+      <circle cx="50" cy="20" r="3" fill="#4FA35A" />
+    </svg>
+  </div>
+
+  <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 flex flex-col min-h-screen">
+    
+    <!-- 1. Floating Pill Navbar -->
+    <header class="w-full flex justify-center sticky top-4 z-50 mb-8">
+      <nav class="bg-white/95 backdrop-blur-md border-2 border-dark rounded-full px-5 py-2.5 flex items-center justify-between gap-4 sm:gap-8 hard-shadow max-w-4xl w-full">
+        <!-- Left: GDG Nashik Brandmark -->
+        <div class="flex items-center gap-2.5 group cursor-pointer">
+          <img src="./assests/GDG-Nashik_Logo.svg" alt="GDG Nashik Logo" class="h-8 w-auto object-contain" />
+        </div>
+
+        <!-- Center: Monospace Wordmark with Status -->
+        <div class="flex items-center gap-2 px-3 py-1 bg-[#F5EEDB] border border-dark rounded-full">
+          <span class="w-2 h-2 rounded-full bg-google-green animate-pulse"></span>
+          <span class="font-mono font-bold text-xs tracking-wider text-dark">CODE ROASTER <span class="bg-mustard text-dark px-1.5 py-0.5 rounded text-[10px] font-black border border-dark ml-1">v2.4</span></span>
+        </div>
+
+        <!-- Right: DevFest Nashik 2026 -->
+        <div class="flex items-center gap-2.5">
+          <img src="./assests/DevFest-26'_Logo.svg" alt="DevFest Nashik 2026 Logo" class="h-8 w-auto object-contain" />
+        </div>
+      </nav>
+    </header>
+
+    <!-- 2. Hero Section -->
+    <section class="text-center max-w-3xl mx-auto mb-10 pt-2">
+      <!-- Eyebrow Tag -->
+      <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white border-2 border-dark hard-shadow-sm mb-5 text-xs font-mono font-bold uppercase tracking-wider text-dark">
+        <span class="text-google-red text-sm">🌶️</span>
+        <span>CODE BOL RAHA HAI · <span class="font-bold text-google-red">मला वाचवा!</span></span>
+        <span class="w-1.5 h-1.5 rounded-full bg-dark"></span>
+        <span class="text-mustard font-black">#DevFestNashik</span>
+      </div>
+
+      <!-- Main Headline -->
+      <h1 class="text-4xl sm:text-6xl lg:text-7xl font-extrabold tracking-tight text-dark mb-4 leading-[1.05]">
+        Code <span class="relative inline-block text-dark">
+          Roaster
+          <!-- Mustard highlighter under title -->
+          <span class="absolute left-0 bottom-1 w-full h-3 bg-mustard/60 -z-10 rounded -rotate-1"></span>
+        </span>
+        <span class="text-2xl sm:text-3xl font-mono align-super ml-1 text-google-red font-bold">(देसी)</span>
+      </h1>
+
+      <!-- Subtitle -->
+      <p class="text-lg sm:text-xl font-medium text-dark/85 max-w-xl mx-auto mb-2 leading-relaxed">
+        Paste your code. Pick your roast. Get humbled. Get the fix.
+      </p>
+
+      <!-- Tagline -->
+      <p class="text-xs sm:text-sm font-mono uppercase tracking-widest text-dark/60 font-semibold flex items-center justify-center gap-2">
+        <span>✨ Desi debugging</span>
+        <span class="text-dark/40">•</span>
+        <span>Powered by Gemini 2.5 Flash</span>
+        <span class="text-dark/40">•</span>
+        <span class="text-google-blue font-bold">Misal-grade Hot</span>
+      </p>
+    </section>
+
+    <!-- 3. Main Split-Pane Tool Card -->
+    <main class="w-full bg-white border-[2.5px] border-dark rounded-[22px] hard-shadow-lg mb-12 overflow-hidden flex flex-col">
+      
+      <!-- Top Control Bar -->
+      <div class="bg-[#F8F4EC] border-b-2 border-dark px-4 sm:px-6 py-4 flex flex-wrap items-center justify-between gap-4">
+        
+        <!-- Left: Controls Group -->
+        <div class="flex flex-wrap items-center gap-3">
+          
+          <!-- Roast Level Segmented Control -->
+          <div class="flex items-center">
+            <span class="text-[11px] font-mono font-bold uppercase text-dark/60 mr-2 tracking-wider hidden sm:inline">Heat:</span>
+            <div class="inline-flex p-1 bg-white border-2 border-dark rounded-full hard-shadow-sm" id="heat-selector">
+              <button class="px-3 py-1 rounded-full text-xs font-mono font-bold text-dark hover:bg-gray-100 transition-colors" onclick="selectHeat('Halka', this)">
+                Halka 🫖
+              </button>
+              <button class="px-3 py-1 rounded-full text-xs font-mono font-black text-dark bg-mustard border border-dark transition-all" onclick="selectHeat('Tikha', this)">
+                Tikha 🌶️
+              </button>
+              <button class="px-3 py-1 rounded-full text-xs font-mono font-bold text-dark hover:bg-gray-100 transition-colors" onclick="selectHeat('Zanzanit', this)">
+                Zanzanit 🔥🔥
+              </button>
+            </div>
+          </div>
+
+          <!-- Persona Dropdown -->
+          <div class="relative">
+            <select class="appearance-none bg-white border-2 border-dark rounded-full px-4 py-1.5 pr-8 text-xs font-mono font-bold text-dark hard-shadow-sm cursor-pointer hover:bg-yellow-50 focus:outline-none focus:ring-2 focus:ring-mustard">
+              <option value="standup">🎙️ Stand-up Roaster</option>
+              <option value="techlead">🕶️ Toxic Senior Dev</option>
+              <option value="nashikkar">🍇 Aggressive Nashikkar</option>
+              <option value="collegeprof">📜 Pune Viva Examiner</option>
+            </select>
+            <div class="pointer-events-none absolute right-3 top-1/2 -translate-y-1/2 text-xs font-bold">
+              ▼
+            </div>
+          </div>
+
+          <!-- Language Selector -->
+          <div class="relative">
+            <select class="appearance-none bg-white border-2 border-dark rounded-full px-4 py-1.5 pr-8 text-xs font-mono font-bold text-dark hard-shadow-sm cursor-pointer hover:bg-yellow-50 focus:outline-none focus:ring-2 focus:ring-mustard">
+              <option value="python">🐍 Python (Auto)</option>
+              <option value="javascript">⚡ JavaScript / TS</option>
+              <option value="cpp">⚙️ C++ / DSA</option>
+              <option value="sql">🗄️ SQL / Query</option>
+              <option value="java">☕ Java Enterprise</option>
+            </select>
+            <div class="pointer-events-none absolute right-3 top-1/2 -translate-y-1/2 text-xs font-bold">
+              ▼
+            </div>
+          </div>
+
+          <!-- Secondary Toggle: + ERROR MESSAGE -->
+          <button id="toggleErrorBtn" onclick="toggleErrorPanel()" class="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full border-2 border-dark bg-white hover:bg-cream text-xs font-mono font-bold text-dark hard-shadow-sm active:translate-x-0.5 active:translate-y-0.5 transition-all">
+            <span class="text-google-red font-black">+</span> ERROR STACK
+          </button>
+        </div>
+
+        <!-- Right: Primary Action CTA -->
+        <div>
+          <button onclick="triggerRoast()" class="group relative inline-flex items-center justify-center gap-2.5 px-6 py-2.5 rounded-full bg-mustard border-2 border-dark font-sans font-black text-sm tracking-wide text-dark hard-shadow hover:translate-x-[-1px] hover:translate-y-[-1px] hover:shadow-[5px_5px_0px_#141414] active:translate-x-[2px] active:translate-y-[2px] active:shadow-[1px_1px_0px_#141414] transition-all">
+            <span>Roast Me / भाजून काढ</span>
+            <span class="text-base group-hover:scale-125 transition-transform">🔥</span>
+            <span class="font-mono">→</span>
+          </button>
+        </div>
+
+      </div>
+
+      <!-- Optional Error Stacktrace Input (Collapsible) -->
+      <div id="errorStackContainer" class="hidden bg-[#FFF9ED] border-b-2 border-dark px-6 py-3 transition-all">
+        <div class="flex items-center justify-between mb-1.5">
+          <label class="text-xs font-mono font-bold uppercase tracking-wider text-google-red flex items-center gap-2">
+            <span>⚠️ Optional Stacktrace / Runtime Error:</span>
+          </label>
+          <span class="text-[10px] font-mono text-gray-500">helps the AI mock you more accurately</span>
+        </div>
+        <input type="text" placeholder="e.g. RecursionError: maximum recursion depth exceeded in comparison / TypeError: undefined is not a function" class="w-full bg-white border border-dark rounded-lg px-3 py-1.5 text-xs font-mono focus:outline-none focus:ring-1 focus:ring-dark" value="RecursionError: maximum recursion depth exceeded while roasting samosa">
+      </div>
+
+      <!-- Split Panes Container -->
+      <div class="grid grid-cols-1 lg:grid-cols-12 min-h-[560px]">
+        
+        <!-- LEFT PANE: Serious Code Editor (5 or 6 cols) -->
+        <div class="lg:col-span-6 bg-code-bg text-cream flex flex-col border-b-2 lg:border-b-0 lg:border-r-2 border-dark relative">
+          
+          <!-- Pane Header -->
+          <div class="flex items-center justify-between px-4 py-2.5 bg-[#202020] border-b border-[#333333]">
+            <div class="flex items-center gap-2">
+              <span class="font-mono text-[11px] font-extrabold tracking-widest text-mustard uppercase">INPUT // SRC</span>
+              <span class="text-gray-500 text-xs">/</span>
+              <span class="font-mono text-xs text-gray-300 font-semibold">YOUR CODE</span>
+            </div>
+            
+            <!-- Utility Actions -->
+            <div class="flex items-center gap-2">
+              <button onclick="loadSampleBug()" class="px-2.5 py-1 rounded bg-[#2D2D2D] hover:bg-[#3D3D3D] text-[11px] font-mono font-bold text-cream border border-[#444] transition-colors flex items-center gap-1">
+                <span>🐛</span> SAMPLE BUG
+              </button>
+              <button onclick="clearCode()" class="px-2.5 py-1 rounded bg-[#2D2D2D] hover:bg-google-red/40 text-[11px] font-mono font-bold text-gray-300 hover:text-white border border-[#444] transition-colors">
+                CLEAR
+              </button>
+            </div>
+          </div>
+
+          <!-- Code Content Area with Line Numbers -->
+          <div class="flex-1 flex overflow-hidden font-mono text-sm leading-relaxed p-0 relative">
+            
+            <!-- Line Numbers (Gutter) -->
+            <div class="select-none py-4 px-3 bg-[#1B1B1B] text-[#555555] text-right font-mono text-xs border-r border-[#2C2C2C] space-y-1">
+              <div>01</div>
+              <div>02</div>
+              <div>03</div>
+              <div>04</div>
+              <div>05</div>
+              <div>06</div>
+              <div>07</div>
+              <div>08</div>
+              <div>09</div>
+              <div>10</div>
+              <div>11</div>
+              <div>12</div>
+            </div>
+
+            <!-- Code Editor Area -->
+            <div class="flex-1 p-4 overflow-y-auto">
+              <pre id="codeDisplay" class="font-mono text-xs sm:text-[13px] leading-6 text-cream/90 selection:bg-mustard selection:text-dark"><code><span class="text-google-blue">def</span> <span class="text-mustard">calculate_devfest_budget</span>(attendees, samosa_per_dev=<span class="text-google-red">3</span>):
+    <span class="text-gray-500"># TODO: Nashik DevFest misal quota calculation</span>
+    total_chai = attendees * <span class="text-google-red">2</span>
+    is_nashikkar = <span class="text-google-blue">True</span>
+    
+    <span class="text-google-blue">if</span> is_nashikkar == <span class="text-google-blue">False</span>:  <span class="text-google-red"># 👈 Peak beginner moment</span>
+        spicy_level = <span class="text-google-green">"Medium"</span>
+    <span class="text-google-blue">else</span>:
+        spicy_level = <span class="text-google-green">"Rassa Unlimited"</span>
+        
+    <span class="text-gray-500"># Infinite recursion because why write a base condition?</span>
+    <span class="text-google-blue">return</span> calculate_devfest_budget(attendees - <span class="text-google-red">0</span>)</code></pre>
+            </div>
+
+            <!-- Corner bug badge -->
+            <div class="absolute bottom-3 right-4 pointer-events-none">
+              <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded bg-[#242424] border border-[#3E3E3E] text-[10px] font-mono text-gray-400">
+                <span class="w-1.5 h-1.5 rounded-full bg-google-red"></span>
+                <span>Infinite Loop Detected</span>
+              </span>
+            </div>
+
+          </div>
+
+          <!-- Status Footer -->
+          <div class="px-4 py-2 bg-[#1B1B1B] border-t border-[#2C2C2C] flex items-center justify-between text-xs font-mono text-gray-400">
+            <div class="flex items-center gap-3">
+              <span class="flex items-center gap-1.5 text-cream font-medium">
+                <span class="w-2 h-2 rounded-full bg-mustard"></span> Python 3.12
+              </span>
+              <span class="text-gray-600">|</span>
+              <span>Auto-detected</span>
+            </div>
+            <div class="flex items-center gap-2">
+              <span class="text-mustard font-bold">12 lines</span>
+              <span class="text-gray-600">·</span>
+              <span>328 chars / 12,000</span>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- RIGHT PANE: Roast Report / Audit (6 cols) -->
+        <div class="lg:col-span-6 bg-cream/30 flex flex-col">
+          
+          <!-- Pane Header -->
+          <div class="flex items-center justify-between px-5 py-2.5 bg-white border-b-2 border-dark">
+            <div class="flex items-center gap-2">
+              <span class="font-mono text-[11px] font-extrabold tracking-widest text-google-red uppercase">AUDIT // REPORT</span>
+              <span class="text-gray-400 text-xs">/</span>
+              <span class="font-mono text-xs text-dark font-bold">ROAST DOSSIER</span>
+            </div>
+            <div class="flex items-center gap-2">
+              <span class="inline-block px-2 py-0.5 rounded bg-google-red/10 border border-google-red text-google-red text-[10px] font-mono font-bold uppercase">
+                STATUS: CHARRED 💀
+              </span>
+            </div>
+          </div>
+
+          <!-- Report Content Container -->
+          <div class="flex-1 p-5 sm:p-6 overflow-y-auto space-y-5">
+            
+            <!-- Rubber Stamp + Score Badge Row -->
+            <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 bg-white p-4 rounded-xl border-2 border-dark hard-shadow-sm relative overflow-hidden">
+              <div class="flex items-center gap-3">
+                <div class="w-14 h-14 rounded-xl bg-google-red text-white flex flex-col items-center justify-center font-mono border-2 border-dark hard-shadow-sm flex-shrink-0">
+                  <span class="text-xl font-black leading-none">28</span>
+                  <span class="text-[9px] font-bold uppercase tracking-tight text-white/80">/ 100</span>
+                </div>
+                <div>
+                  <div class="text-xs font-mono font-bold uppercase tracking-wider text-gray-500">Quality Quotient</div>
+                  <h3 class="text-base font-extrabold text-dark leading-tight">ATTENDANCE SHORT, CODE BHI SHORT</h3>
+                </div>
+              </div>
+
+              <!-- Rubber Stamp -->
+              <div class="stamp-rotate border-2 border-google-red px-3 py-1 rounded text-google-red font-mono font-black text-xs uppercase tracking-widest bg-red-50/60 shadow-sm sm:self-center">
+                ⚠️ CATASTROPHIC JHOL
+              </div>
+            </div>
+
+            <!-- Savage Headline Banner -->
+            <div class="bg-[#FFF4D9] border-2 border-dark p-4 rounded-xl hard-shadow-sm">
+              <div class="text-[10px] font-mono uppercase font-black tracking-widest text-mustard-700 text-dark/70 mb-1 flex items-center gap-1.5">
+                <span>🎙️ STAND-UP ROAST VERDICT</span>
+                <span class="w-1 h-1 rounded-full bg-dark"></span>
+                <span>Heat: Tikha (तिखट)</span>
+              </div>
+              <p class="text-lg sm:text-xl font-bold text-dark font-sans leading-snug">
+                "Yeh function nahi, Panchavati Express ki general boghi hai—jisme ghus toh gaye, par nikalne ka koi base condition nahi hai!"
+              </p>
+              <div class="mt-3 pt-2.5 border-t border-dark/15 flex items-center justify-between text-xs text-dark/80 font-mono">
+                <span>Roasted in 0.42s by Gemini</span>
+                <button class="font-bold underline hover:text-google-blue">Copy Roast Link 🔗</button>
+              </div>
+            </div>
+
+            <!-- Detailed Issue Breakdown Cards -->
+            <div class="space-y-3">
+              <div class="text-xs font-mono font-bold tracking-wider uppercase text-dark/60">
+                IDENTIFIED DISASTERS (2 CRITICAL ISSUES)
+              </div>
+
+              <!-- Issue Card 1 -->
+              <div class="bg-white border-2 border-dark rounded-xl p-4 hard-shadow-sm">
+                <div class="flex items-center justify-between mb-2">
+                  <div class="flex items-center gap-2">
+                    <span class="px-2 py-0.5 rounded bg-google-red text-white text-[10px] font-mono font-black uppercase">
+                      CRITICAL · LOGIC
+                    </span>
+                    <span class="font-mono text-xs text-gray-500 font-semibold">Lines 11-12</span>
+                  </div>
+                  <span class="text-xs font-mono text-google-red font-bold">Stack Overflow</span>
+                </div>
+                
+                <h4 class="text-sm font-bold text-dark mb-1">
+                  "Bhau, <code class="font-mono bg-gray-100 px-1 rounded text-xs text-google-red">attendees - 0</code> karke kaun sa universe expand kar rahe ho?"
+                </h4>
+                <p class="text-xs text-gray-600 mb-3 leading-relaxed">
+                  You are subtracting zero and recursively calling yourself until Python gives up on your engineering degree.
+                </p>
+
+                <!-- Fix Suggestion Accordion Box -->
+                <div class="bg-[#F0F7ED] border border-google-green rounded-lg p-3">
+                  <div class="flex items-center justify-between text-xs font-mono font-bold text-google-green mb-1.5">
+                    <span class="flex items-center gap-1.5">
+                      <span>💡</span> THE DESI FIX (RECOVERY CODE)
+                    </span>
+                    <button class="text-[10px] bg-white border border-google-green px-1.5 py-0.5 rounded hover:bg-green-50 text-dark">Apply Fix</button>
+                  </div>
+                  <pre class="font-mono text-[11px] text-dark/90 bg-white p-2 rounded border border-google-green/40 overflow-x-auto"><code><span class="text-google-blue">if</span> attendees <= <span class="text-google-red">0</span>:
+    <span class="text-google-blue">return</span> total_chai  <span class="text-gray-500"># Stop the loop, save the server!</span>
+<span class="text-google-blue">return</span> calculate_devfest_budget(attendees - <span class="text-google-red">1</span>)</code></pre>
+                </div>
+              </div>
+
+              <!-- Issue Card 2 -->
+              <div class="bg-white border-2 border-dark rounded-xl p-4 hard-shadow-sm">
+                <div class="flex items-center justify-between mb-2">
+                  <div class="flex items-center gap-2">
+                    <span class="px-2 py-0.5 rounded bg-mustard text-dark text-[10px] font-mono font-black uppercase">
+                      STYLE · ROOKIE
+                    </span>
+                    <span class="font-mono text-xs text-gray-500 font-semibold">Line 06</span>
+                  </div>
+                  <span class="text-xs font-mono text-gray-600 font-semibold">PEP8 Violation</span>
+                </div>
+                
+                <h4 class="text-sm font-bold text-dark mb-1">
+                  <code class="font-mono bg-gray-100 px-1 rounded text-xs text-dark">if is_nashikkar == False:</code>
+                </h4>
+                <p class="text-xs text-gray-600 leading-relaxed">
+                  Comparing directly with boolean literals in Python hurts Guido van Rossum personally. Just write <code class="font-mono bg-gray-100 px-1 text-xs">if not is_nashikkar:</code> like a civilized developer.
+                </p>
+              </div>
+
+            </div>
+
+            <!-- Community Share Action Bar -->
+            <div class="p-3 bg-white border-2 border-dark rounded-xl flex items-center justify-between gap-2">
+              <span class="text-xs font-mono font-bold text-dark flex items-center gap-1.5">
+                <span>📢</span> Flaunt your humiliation on socials
+              </span>
+              <div class="flex items-center gap-1.5">
+                <button class="px-3 py-1 rounded-full bg-cream hover:bg-mustard border border-dark text-xs font-mono font-bold transition-colors">
+                  Share on X
+                </button>
+                <button class="px-3 py-1 rounded-full bg-cream hover:bg-google-blue hover:text-white border border-dark text-xs font-mono font-bold transition-colors">
+                  LinkedIn
+                </button>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- Audit Footer -->
+          <div class="px-5 py-2.5 bg-white border-t-2 border-dark flex items-center justify-between text-xs font-mono text-dark/70">
+            <div class="flex items-center gap-2">
+              <span>Roast Engine:</span>
+              <span class="font-bold text-dark">Gemini 2.5 Flash</span>
+            </div>
+            <div class="flex items-center gap-1 text-google-green font-bold">
+              <span>●</span> Ready for another burn
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+
+    </main>
+
+    <!-- 4. Community Spotlight / Nashik DevFest Teaser Ribbon -->
+    <div class="w-full mb-10 grid grid-cols-1 md:grid-cols-3 gap-4">
+      
+      <div class="bg-white border-2 border-dark rounded-xl p-4 hard-shadow-sm flex items-start gap-3">
+        <div class="w-10 h-10 rounded-lg bg-mustard border-2 border-dark flex items-center justify-center text-lg font-black shrink-0 hard-shadow-sm">
+          🍇
+        </div>
+        <div>
+          <h4 class="text-xs font-mono font-black uppercase tracking-wider text-dark">Nashik Misal Heat Levels</h4>
+          <p class="text-xs text-gray-600 mt-0.5 leading-snug">Switch from Halka (gentle banter) to Zanzanit (ruthless architectural destruction).</p>
+        </div>
+      </div>
+
+      <div class="bg-white border-2 border-dark rounded-xl p-4 hard-shadow-sm flex items-start gap-3">
+        <div class="w-10 h-10 rounded-lg bg-google-blue text-white border-2 border-dark flex items-center justify-center text-lg font-black shrink-0 hard-shadow-sm">
+          ⚙️
+        </div>
+        <div>
+          <h4 class="text-xs font-mono font-black uppercase tracking-wider text-dark">Instant Recovery Diff</h4>
+          <p class="text-xs text-gray-600 mt-0.5 leading-snug">Because a roast without the fix is just bullying. Copy working code in 1 click.</p>
+        </div>
+      </div>
+
+      <div class="bg-white border-2 border-dark rounded-xl p-4 hard-shadow-sm flex items-start gap-3">
+        <div class="w-10 h-10 rounded-lg bg-google-green text-white border-2 border-dark flex items-center justify-center text-lg font-black shrink-0 hard-shadow-sm">
+          🎟️
+        </div>
+        <div>
+          <h4 class="text-xs font-mono font-black uppercase tracking-wider text-dark">DevFest Nashik 2026</h4>
+          <p class="text-xs text-gray-600 mt-0.5 leading-snug">Come for the AI tech talks, stay for the grapes and community warmth.</p>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- 5. Geometric Warli / Rangoli Triangle Strip -->
+    <div class="w-full py-3 overflow-hidden flex items-center justify-center gap-2 mb-6 opacity-85 select-none">
+      <svg width="100%" height="24" viewBox="0 0 1000 24" fill="none" class="w-full max-w-5xl">
+        <pattern id="rangoli-strip" x="0" y="0" width="40" height="24" patternUnits="userSpaceOnUse">
+          <!-- Geometric Warli double triangles -->
+          <polygon points="10,2 18,12 2,12" fill="#141414" />
+          <polygon points="10,22 18,12 2,12" fill="#141414" />
+          <circle cx="10" cy="12" r="2" fill="#EDB13E" />
+          <!-- Connecting dots and diamond -->
+          <circle cx="20" cy="12" r="1.5" fill="#4C80F0" />
+          <polygon points="30,4 36,12 30,20 24,12" stroke="#141414" stroke-width="1.5" fill="none" />
+          <circle cx="30" cy="12" r="2" fill="#D9503F" />
+          <circle cx="40" cy="12" r="1.5" fill="#4FA35A" />
+        </pattern>
+        <rect x="0" y="0" width="1000" height="24" fill="url(#rangoli-strip)" />
+      </svg>
+    </div>
+
+    <!-- 6. Footer -->
+    <footer class="mt-auto border-t-2 border-dark pt-6 pb-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs font-mono">
+      <div class="flex items-center gap-3">
+        <div class="flex items-center gap-1">
+          <span class="w-2.5 h-2.5 rounded-full bg-google-blue"></span>
+          <span class="w-2.5 h-2.5 rounded-full bg-google-red"></span>
+          <span class="w-2.5 h-2.5 rounded-full bg-mustard"></span>
+          <span class="w-2.5 h-2.5 rounded-full bg-google-green"></span>
+        </div>
+        <span class="text-dark font-semibold">
+          Built with ❤️ by <strong>Google Developer Groups Nashik</strong> · DevFest Nashik 2026
+        </span>
+      </div>
+
+      <div class="flex items-center gap-4 text-gray-600">
+        <span class="text-dark/40">नाशिक · त्र्यंबकेश्वर · गोदावरी</span>
+        <span class="font-bold text-dark">#CodeRoaster</span>
+        <a href="#top" class="hover:text-dark font-bold underline">Back to Top ↑</a>
+      </div>
+    </footer>
+
+  </div>
+
+  <script>
+    function selectHeat(level, el) {
+      const container = document.getElementById('heat-selector');
+      const buttons = container.querySelectorAll('button');
+      buttons.forEach(btn => {
+        btn.classList.remove('bg-mustard', 'border', 'border-dark', 'font-black');
+        btn.classList.add('font-bold');
+      });
+      el.classList.add('bg-mustard', 'border', 'border-dark', 'font-black');
+      el.classList.remove('font-bold');
+    }
+
+    function toggleErrorPanel() {
+      const panel = document.getElementById('errorStackContainer');
+      const btn = document.getElementById('toggleErrorBtn');
+      if (panel.classList.contains('hidden')) {
+        panel.classList.remove('hidden');
+        btn.classList.add('bg-mustard');
+      } else {
+        panel.classList.add('hidden');
+        btn.classList.remove('bg-mustard');
+      }
+    }
+
+    function loadSampleBug() {
+      const code = `def calculate_devfest_budget(attendees, samosa_per_dev=3):
+    # TODO: Nashik DevFest misal quota calculation
+    total_chai = attendees * 2
+    is_nashikkar = True
+    
+    if is_nashikkar == False:  # 👈 Peak beginner moment
+        spicy_level = "Medium"
+    else:
+        spicy_level = "Rassa Unlimited"
+        
+    # Infinite recursion because why write a base condition?
+    return calculate_devfest_budget(attendees - 0)`;
+      document.querySelector('#codeDisplay code').textContent = code;
+    }
+
+    function clearCode() {
+      document.querySelector('#codeDisplay code').textContent = `# Paste your code here and prepare for humiliation...\ndef your_function():\n    pass`;
+    }
+
+    function triggerRoast() {
+      const banner = document.querySelector('.stamp-rotate');
+      if (banner) {
+        banner.classList.add('scale-110');
+        setTimeout(() => banner.classList.remove('scale-110'), 200);
+      }
+    }
+  </script>
+</body>
+</html>
+
